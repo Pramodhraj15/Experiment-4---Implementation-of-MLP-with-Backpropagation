@@ -1,5 +1,3 @@
-Done By: pramodh.R
-Reg.No: 212221040128
 
 import pandas as pd
 import sklearn
@@ -45,30 +43,4 @@ print(predictions)
 # Evaluation of algorithm performance in classifying flowers
 print(confusion_matrix(Y_test,predictions))
 print(classification_report(Y_test,predictions))
-OUTPUT:
-df.head():
-image
 
-X.head():
-image
-
-Y.head():
-image
-
-Unique Values in Y:
-image
-
-Transforming Categorical to numerical values:
-image
-
-Predictions:
-image
-
-Confusion Matrix:
-image
-
-Classification_report:
-image
-
-RESULT:
-Thus, a program to implement Multilayer Perceptron for Multi Classification is successfully created and executed.
