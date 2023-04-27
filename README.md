@@ -1,46 +1,23 @@
-
 import pandas as pd
 import sklearn
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import classification_report, confusion_matrix
-
-df = pd.read_csv('IRIS.csv')
-df.head
-
-names = ['sepal-length','sepal-width','petal-length','petal-width','Class']
-
-# Take first 4 columns ans assign them to variable "X"
-X = df.iloc[:,0:4]
-# Take first 5th columns and assign them to variable "Y". Object dtype refers to strings
-Y = df.select_dtypes(include=[object])
-X.head()
-Y.head()
-
-# Y actually contains all categories or classes
-Y.species.unique()
-
-# Now transforming categorial into numerical values
-le = preprocessing.LabelEncoder()
-Y = Y.apply(le.fit_transform)
-Y.head()
-
-# Train and test split (80% of data into training set and 20% into test data)
-X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.20)
-
-# Feature Scaling
-scaler = StandardScaler() 
-scaler.fit(X_train)
-X_train = scaler.transform(X_train)
-X_test = scaler.transform(X_test)
-mlp = MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
-mlp.fit(X_train,Y_train.values.ravel())
-predictions = mlp.predict(X_test)
+from sklearn.metrics import classification_report,confusion_matrix
+irisdata=pd.read_csv("iris.txt")
+x=irisdata.iloc[:,0:4]
+y=irisdata.select_dtypes(include=[object])
+le=preprocessing.LabelEncoder()
+y=y.apply(le.fit_transform)
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+scaler=StandardScaler()
+scaler.fit(x_train)
+x_train=scaler.transform(x_train)
+x_test=scaler.transform(x_test)
+mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+mlp.fit(x_train,y_train.values.ravel())
+predictions=mlp.predict(x_test)
 print(predictions)
-
-# Evaluation of algorithm performance in classifying flowers
-print(confusion_matrix(Y_test,predictions))
-print(classification_report(Y_test,predictions))
-
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
